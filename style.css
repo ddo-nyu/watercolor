@@ -1,8 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital@1&display=swap');
+
 html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+}
+
+body {
+    background-image: url("white-paper-texture.jpg");
+    background-size: cover;
 }
 
 canvas {
     display: block;
+    opacity: 0.5;
+}
+
+main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /*display: none;*/
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    visibility: hidden;
+}
+
+#pose-video {
+    display: none;
+}
+
+.control-panel {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background: #eee;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    /*right: calc(100% - 50px);*/
+    left: 0;
+
+    -webkit-transition: all 0.5s 0s ease, all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease, all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease, all 0.5s 0s ease;
+    transition: all 0.5s 0s ease, all 0.5s 0s ease;
+}
+
+/*.control-panel.open {*/
+/*    right: 79%;*/
+/*}*/
+
+.control-panel.hide {
+    display: none;
+}
+
+.control-panel .input-wrapper {
+    margin: 20px 0;
+}
+
+.arrow-wrapper {
+    padding: 0 0 0 20px;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    -webkit-transition: all 0.5s 0s ease, all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease, all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease, all 0.5s 0s ease;
+    transition: all 0.5s 0s ease, all 0.5s 0s ease;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.init-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+
+    transition: all 3s 0s ease;
+}
+
+.init-screen.hide {
+    opacity: 0;
+    z-index: -1;
+}
+
+.init-screen .content-container {
+    max-width: 600px;
+}
+
+.init-screen .instruction-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#wave-hand-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.wobble-hor-bottom {
+    -webkit-animation: wobble-hor-bottom 5s ease-in-out infinite both;
+    animation: wobble-hor-bottom 5s ease-in-out infinite both;
+}
+
+@keyframes wobble-hor-bottom {
+    0%,
+    100% {
+        transform: translateX(0%);
+        transform-origin: 50% 50%;
+    }
+
+    15% {
+        transform: translateX(-30px) rotate(-6deg);
+    }
+
+    30% {
+        transform: translateX(15px) rotate(6deg);
+    }
+
+    45% {
+        transform: translateX(-15px) rotate(-3.6deg);
+    }
+
+    60% {
+        transform: translateX(9px) rotate(2.4deg);
+    }
+
+    75% {
+        transform: translateX(-6px) rotate(-1.2deg);
+    }
 }

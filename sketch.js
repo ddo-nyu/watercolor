@@ -1,78 +1,141 @@
-let x1, y1 ,x2, y2, r, nsides, r2;
+let x1, y1 ,x2, y2, r, r2, y3, w1, h1;
+let arrBuffer = [];
+
 const serial = new p5.WebSerial();
 let portButton;
 let inData;
 
+let maxR;
+const nsides = 5;
+
+let YELLOW = 'rgba(255, 187, 0, 0.05)';
+let PINK = 'rgba(163, 2, 61, 0.01)';
+let BLUE = 'rgba(5, 0, 135, 0.05)';
+
+let currentColor = BLUE;
+
 function windowResized() {
+    screenshot();
     resizeCanvas(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener('dblclick', () => {
+    let fs = fullscreen();
+    fullscreen(!fs);
+});
+
+// setInterval(() => {
+//     screenshot();
+// }, 10000);
+
+let sounds = [];
+let currentSound = null;
+function preload() {
+    soundFormats('mp3', 'ogg');
+    sounds.push(loadSound('sounds/sound1'));
+    sounds.push(loadSound('sounds/sound2'));
+    sounds.push(loadSound('sounds/sound3'));
 }
 
 function setup() {
     webSerialSetup();
     createCanvas(window.innerWidth, window.innerHeight);
-    frameRate(10);
+    // frameRate(1);
     background(255);
     noStroke();
 
-    x1 = 0;
-    y1 = height / 2;
-    r = 0;
+    maxR = 100;
     r2 = 0;
+    r = 10;
 
-    x2 = width;
-    y2 = height / 2;
+}
 
-    nsides = 10;
+let graphics;
+function screenshot() {
+    graphics = createGraphics(width, height);
 
-    const yellowColor = {
-        R: 255,
-        G: 240,
-        B: 0,
-        A: 0.01,
-    };
+    //empty arrBuffer;
+    arrBuffer = [];
+}
 
-    const blueColor = {
-        R: 15,
-        G: 10,
-        B: 222,
-        A: 0.01,
-    }
-
-    const greenColor = mixColors(yellowColor, blueColor);
-    console.log(greenColor);
+function setBrushRadius(newR) {
+    r = 10;
+    maxR = newR;
 }
 
 function draw() {
-    fill('rgba(255, 240, 0, 0.01)');
-    const yellowStack = polystack(mouseX, mouseY, 200, nsides);
-    draw_stack(yellowStack);
+    // console.log(arrBuffer);
 
-    // if (r < (width / 2) - (width / 10)) {
-    //     r += 10;
-    // } else {
-    //     r2 += 10;
+    if (graphics) {
+        image(graphics, width, height);
+    }
+
+    // if (x1 && y1) {
+    //     fill(currentColor);
+    //     const blueStack = polystack(x1, y1, r, nsides);
+    //     draw_stack(blueStack);
+    //     if (r < maxR) {
+    //         r+=1;
+    //     }
     // }
 
-    // fill('rgba(255, 240, 0, 0.01)');
-    // const yellowStack = polystack(x1, y1, r, nsides);
-    // draw_stack(yellowStack);
 
-    // fill('rgba(15, 10, 222, 0.01)');
-    // const blueStack = polystack(x2, y2, r, nsides);
-    // draw_stack(blueStack);
+    if (arrBuffer.length > 0) {
+        // if(!currentSound) {
+        //     const randomIndex = round(random(0, sounds.length - 1));
+        //     currentSound = sounds[randomIndex];
+        // } else if (!currentSound.isPlaying()) {
+        //     currentSound.play();
+        //     currentSound = null;
+        // }
+        arrBuffer.forEach(ab => {
+            fill(ab.color);
+            const blueStack = polystack(ab.x, ab.y, r, nsides);
+            draw_stack(blueStack);
+            if (r < maxR) {
+                r+=1;
+            }
+        });
+    }
 
-    // if (r2 > 0) {
-    //     fill('rgba(60, 179, 113, 0.01)');
-    //     const greenStack = polystack(width / 2, height / 2, r2, nsides);
-    //     draw_stack(greenStack);
+    // if (arrBuffer.length > 0) {
+    //     fill('rgba(15, 10, 222, 0.03)');
+    //     for (let i = 0; i < arrBuffer.length; i++) {
+    //         const x = arrBuffer[i].x + (arrBuffer[i].w / 2);
+    //         const y = arrBuffer[i].y + (arrBuffer[i].y / 2);
+    //         const blueStack = polystack(x, y, r, nsides);
+    //         draw_stack(blueStack);
+    //         r+=10;
+    //     }
     // }
+
 
     // if (inData) {
     //     const dataArr = parseData(inData);
     //     fill('rgba(15, 10, 222, 0.01)');
-    //     console.log(parseFloat(dataArr[0]));
     //     const blueStack = polystack(width / 2, height / 2, parseFloat(dataArr[0]), nsides);
     //     draw_stack(blueStack);
+    // } else {
+    //     if (r < (width / 2) ) {
+    //         r += 3;
+    //     } else {
+    //         r2 += 3;
+    //         // y3 += 3;
+    //     }
+    //
+    //     fill(YELLOW);
+    //     const stack1 = polystack(x1, y1, r, nsides);
+    //     draw_stack(stack1);
+    //
+    //     fill(PINK);
+    //     const stack2 = polystack(x2, y2, r, nsides);
+    //     draw_stack(stack2);
+    //
+    //     if (r2 > 0 && r2 < width / 2) {
+    //         fill(BLUE);
+    //         const stack3 = polystack(width / 2, height / 2, r2, nsides);
+    //         draw_stack(stack3);
+    //     }
     // }
 }
 
@@ -89,9 +152,11 @@ function mixColors(fg, bg) {
 function draw_poly(points) {
     beginShape();
     for (let i = 0; i < points.length; i++) {
-        curveVertex(points[i].x, points[i].y);
+        vertex(points[i].x, points[i].y);
     }
     endShape(CLOSE);
+    // fill('black');
+    // circle(random(0, points[i].x), random(0, points[i].y), 5);
 }
 
 function rpoly(x, y, radius, npoints) {
@@ -153,7 +218,7 @@ function subdivide(new_points, x1, y1, x2, y2, depth, variance, vdiv) {
 function create_base_poly(x, y, r, nsides) {
     let bp = [];
     bp = rpoly(x, y, r, nsides);
-    bp = deform(bp, 5, r/10, 2);
+    bp = deform(bp, 5, r/4, 2);
     return bp;
 }
 
@@ -163,11 +228,11 @@ function polystack(x, y, r, nsides) {
 
     /* Generate a base polygon with depth 5 and variance 15 */
     base_poly = rpoly(x, y, r, nsides);
-    base_poly = deform(base_poly,  1, r/10, 2);
+    base_poly = deform(base_poly,  1, r/4, 2);
 
     /* Generate a variation of the base polygon with a random variance */
-    for (let k = 0; k < 5; k++) {
-        poly = deform(base_poly, 5, random(r/15, r/5), 4);
+    for (let k = 0; k < 3; k++) {
+        poly = deform(base_poly, 5, r/4, 2);
         stack.push(poly);
     }
 
@@ -177,6 +242,7 @@ function polystack(x, y, r, nsides) {
 function draw_stack(stack) {
     for (let i = 0; i < stack.length; i++) {
         draw_poly(stack[i]);
+        // screenshot();
     }
 }
 
@@ -188,7 +254,7 @@ function webSerialSetup() {
     // check for any ports that are available:
     serial.getPorts();
     // if there's no port chosen, choose one:
-    serial.on("noport", makePortButton);
+    // serial.on("noport", makePortButton);
     // open whatever port is available:
     serial.on("portavailable", openPort);
     // handle serial errors:
@@ -223,6 +289,7 @@ function openPort() {
     // once the port opens, let the user know:
     function initiateSerial() {
         console.log("port open");
+        document.querySelector('.control-panel').classList.add('hide');
     }
     // hide the port button once a port is chosen:
     if (portButton) portButton.hide();
@@ -234,7 +301,6 @@ function portError(err) {
 
 function serialEvent() {
     inData = serial.readLine();
-    // console.log(inData);
 }
 
 function portConnect() {
@@ -255,3 +321,5 @@ function closePort() {
 function parseData(data) {
     return data.split(';');
 }
+
+
