@@ -4,7 +4,10 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -17,11 +20,18 @@ canvas {
     opacity: 0.5;
 }
 
+button {
+    border: 1px solid black;
+    background: none;
+    outline: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 1em;
+}
+
 main {
     position: fixed;
     top: 0;
     left: 0;
-    /*display: none;*/
 }
 
 .container {
@@ -37,60 +47,45 @@ main {
 }
 
 .control-panel {
+    display: none;
+
     position: fixed;
     top: 0;
     z-index: 2;
     background: #eee;
-    padding: 20px;
-    display: flex;
+    padding: 10px 20px;
     align-items: center;
-    /*right: calc(100% - 50px);*/
     left: 0;
 
     -webkit-transition: all 0.5s 0s ease, all 0.5s 0s ease;
     -moz-transition: all 0.5s 0s ease, all 0.5s 0s ease;
     -o-transition: all 0.5s 0s ease, all 0.5s 0s ease;
     transition: all 0.5s 0s ease, all 0.5s 0s ease;
+
 }
 
-/*.control-panel.open {*/
-/*    right: 79%;*/
-/*}*/
-
-.control-panel.hide {
-    display: none;
+.control-panel.show {
+    display: flex;
 }
 
 .control-panel .input-wrapper {
     margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.arrow-wrapper {
-    padding: 0 0 0 20px;
+.control-panel .input-wrapper label {
+    margin-right: 5px;
 }
 
-.arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    -webkit-transition: all 0.5s 0s ease, all 0.5s 0s ease;
-    -moz-transition: all 0.5s 0s ease, all 0.5s 0s ease;
-    -o-transition: all 0.5s 0s ease, all 0.5s 0s ease;
-    transition: all 0.5s 0s ease, all 0.5s 0s ease;
-}
-
-.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
-.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
+.control-panel .input-wrapper input {
+    margin-right: 25px;
 }
 
 .init-screen {
+
+
     position: fixed;
     top: 0;
     left: 0;
@@ -106,6 +101,7 @@ main {
     opacity: 1;
 
     transition: all 3s 0s ease;
+
 }
 
 .init-screen.hide {

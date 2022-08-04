@@ -9,13 +9,12 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
+    <title>Ambient Watercolor</title>
 </head>
 <body>
 <div class="init-screen">
     <div class="content-container">
-<!--        <h1>welcome to ambient watercolor</h1>-->
         <p>Art is standing with one hand extended into the universe and one hand extended into the world and letting ourselves be a conduit for passing energy.</p>
-
     </div>
     <div class="instruction-container">
         <img id="wave-hand-icon" class="wobble-hor-bottom" src="assets/wave.png" alt="wave hand"/>
@@ -35,27 +34,35 @@
     <div>
         <div class="input-wrapper">
             <label for="brush-size-input">Brush size</label>
-            <input id="brush-size-input" type="range" min="100" max="500" value="100" />
+            <input id="brush-size-input" type="range" min="100" max="200" value="100" step="10" />
         </div>
-
 
         <div class="input-wrapper">
-            <label for="blue-brush">Blue</label>
-            <input type="radio" id="blue-brush" name="brush-color" value="rgba(5, 0, 135, 0.01)" checked />
-
-            <label for="yellow-brush">Yellow</label>
-            <input type="radio" id="yellow-brush" name="brush-color" value="rgba(255, 187, 0, 0.01)" />
-
-            <label for="red-brush">Red</label>
-            <input type="radio" id="red-brush" name="brush-color" value="rgba(163, 2, 61, 0.01)" />
+            <label for="r-value">Red</label>
+            <input class="brush-color" id="r-value" type="range" min="0" max="255" value="5" step="1" />
         </div>
 
+        <div class="input-wrapper">
+            <label for="g-value">Green</label>
+            <input class="brush-color" id="g-value" type="range" min="0" max="255" value="0" step="1" />
+        </div>
+
+        <div class="input-wrapper">
+            <label for="b-value">Blue</label>
+            <input class="brush-color" id="b-value" type="range" min="0" max="255" value="135" step="1" />
+        </div>
+
+        <div class="input-wrapper">
+            <button id="clear-button">Clear</button>
+        </div>
     </div>
-<!--    <div class="arrow-wrapper">-->
-<!--        <i class="arrow right"></i>-->
-<!--    </div>-->
 </div>
+
+<script src="webserial.js"></script>
 <script src="sketch.js"></script>
 <script src="handtrack.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+
+
