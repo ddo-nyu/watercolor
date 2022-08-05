@@ -4,7 +4,6 @@ const nsides = 5;
 let sounds = [];
 let song;
 let currentSound = null;
-let inData;
 const myWorker = new Worker('worker.js');
 const COLORS = {
     YELLOW: 'rgba(255, 187, 0, 0.05)',
@@ -37,13 +36,13 @@ function draw() {
     }
 
     if (arrBuffer.length > 0) {
-        // if(!currentSound) {
-        //     const randomIndex = round(random(0, sounds.length - 1));
-        //     currentSound = sounds[randomIndex];
-        // } else if (!currentSound.isPlaying()) {
-        //     currentSound.play();
-        //     currentSound = null;
-        // }
+        if(!currentSound) {
+            const randomIndex = round(random(0, sounds.length - 1));
+            currentSound = sounds[randomIndex];
+        } else if (!currentSound.isPlaying()) {
+            currentSound.play();
+            currentSound = null;
+        }
 
         // if (!song?.isPlaying()) {
         //     song?.play();
