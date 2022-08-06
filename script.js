@@ -3,16 +3,16 @@ document.querySelector('#brush-size-input').onchange = e => {
     r = parseInt(e.target.value);
 };
 
-document.querySelectorAll('.brush-color').forEach(slider => {
+document.querySelectorAll('.brush-color-input').forEach(slider => {
     slider.onchange = e => {
         updateCurrentColor();
     }
 })
 
 function updateCurrentColor() {
-    const r = document.querySelectorAll('.brush-color#r-value')[0].value;
-    const g = document.querySelectorAll('.brush-color#g-value')[0].value;
-    const b = document.querySelectorAll('.brush-color#b-value')[0].value;
+    const r = document.querySelectorAll('.brush-color-input#r-value')[0].value;
+    const g = document.querySelectorAll('.brush-color-input#g-value')[0].value;
+    const b = document.querySelectorAll('.brush-color-input#b-value')[0].value;
     const str = `rgba(${r}, ${g}, ${b}, 0.05)`;
     if (str !== currentColor) {
         screenshot();

@@ -42,7 +42,9 @@ function openPort() {
 
 function portError(err) {
     console.error("Serial port error: " + err);
-    document.querySelector('.control-panel').classList.add('show');
+    document.querySelectorAll('.control-panel .brush-color').forEach(brushInput => {
+        brushInput.classList.add('show');
+    });
 }
 
 function serialEvent() {

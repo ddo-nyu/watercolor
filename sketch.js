@@ -171,3 +171,8 @@ function doubleClicked() {
     let fs = fullscreen();
     fullscreen(!fs);
 }
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    resizeVideo();
+}

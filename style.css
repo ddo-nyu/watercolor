@@ -47,7 +47,7 @@ main {
 }
 
 .control-panel {
-    display: none;
+    /*display: none;*/
 
     position: fixed;
     top: 0;
@@ -65,10 +65,6 @@ main {
 
 }
 
-.control-panel.show {
-    display: flex;
-}
-
 .control-panel .input-wrapper {
     margin: 20px 0;
     display: flex;
@@ -83,6 +79,16 @@ main {
 .control-panel .input-wrapper input {
     margin-right: 25px;
 }
+
+.control-panel .brush-color {
+    display: none;
+}
+
+.control-panel .brush-color.show {
+    display: flex;
+}
+
+
 
 .init-screen {
 
@@ -154,5 +160,27 @@ main {
 
     75% {
         transform: translateX(-6px) rotate(-1.2deg);
+    }
+}
+
+.landscape-warning {
+    display: none;
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+@media screen and (orientation: portrait) {
+    .landscape-warning {
+        display: flex;
     }
 }
