@@ -3,6 +3,7 @@ let arrBuffer = [];
 const nsides = 5;
 let sounds = [];
 let song;
+let muted = false;
 let currentSound = null;
 const myWorker = new Worker('worker.js');
 const COLORS = {
@@ -18,7 +19,6 @@ function preload() {
     sounds.push(loadSound('sounds/sound1'));
     sounds.push(loadSound('sounds/sound2'));
     sounds.push(loadSound('sounds/sound3'));
-    // song = loadSound('sounds/3');
 }
 
 function setup() {
@@ -39,16 +39,10 @@ function draw() {
         if(!currentSound) {
             const randomIndex = round(random(0, sounds.length - 1));
             currentSound = sounds[randomIndex];
-        } else if (!currentSound.isPlaying()) {
+        } else if (!currentSound.isPlaying() && !muted) {
             currentSound.play();
             currentSound = null;
         }
-
-        // if (!song?.isPlaying()) {
-        //     song?.play();
-        // }
-        //
-        // song?.setVolume(1, 3);
 
         arrBuffer.forEach(ab => {
             myWorker.postMessage({

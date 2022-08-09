@@ -26,6 +26,7 @@ button {
     outline: none;
     font-family: 'Space Mono', monospace;
     font-size: 1em;
+    color: inherit;
 }
 
 main {
@@ -91,8 +92,6 @@ main {
 
 
 .init-screen {
-
-
     position: fixed;
     top: 0;
     left: 0;
@@ -106,9 +105,7 @@ main {
     align-items: center;
     flex-direction: column;
     opacity: 1;
-
     transition: all 3s 0s ease;
-
 }
 
 .init-screen.hide {
@@ -118,11 +115,38 @@ main {
 
 .init-screen .content-container {
     max-width: 600px;
+    opacity: 0;
+    transition: all 3s 0s ease;
+}
+
+.init-screen .content-container.show {
+    opacity: 1;
 }
 
 .init-screen .instruction-container {
     margin-top: 50px;
     text-align: center;
+    opacity: 0;
+    transition: all 3s 0s ease;
+}
+
+.init-screen .instruction-container.show {
+    opacity: 1;
+}
+
+.init-screen .button-container {
+    opacity: 0;
+    color: white;
+    margin-top: 20px;
+    transition: all 3s 0s ease;
+}
+
+.init-screen .button-container.show {
+    opacity: 1;
+}
+
+.init-screen .button-container button {
+    border: none;
 }
 
 #wave-hand-icon {
@@ -175,6 +199,23 @@ main {
     color: white;
     align-items: center;
     justify-content: center;
+}
+
+.spotlight {
+    background: white;
+    position: absolute;
+    bottom: 10%;
+    width: 80%;
+    height: 40%;
+    border-radius: 50%;
+    filter: blur(2rem);
+    opacity: 0;
+    transition: all 3s 0s ease;
+    z-index: -1;
+}
+
+.spotlight.show {
+    opacity: 0.1;
 }
 
 

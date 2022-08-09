@@ -4,8 +4,7 @@ const context = canvas.getContext("2d");
 
 let isVideo = false;
 let model = null;
-
-
+let isHandTrackLoaded = false;
 
 const modelParams = {
     flipHorizontal: true,
@@ -55,16 +54,6 @@ function runDetection() {
                     r,
                 };
                 arrBuffer.push(points);
-                // myWorker.postMessage({
-                //     x: points.x,
-                //     y: points.y,
-                //     r: 100,
-                //     nsides: 5,
-                // });
-                // myWorker.onmessage = e => {
-                //     fill(currentColor);
-                //     draw_stack(e.data);
-                // }
             })
         } else {
             arr = [];
@@ -83,6 +72,6 @@ handTrack.load(modelParams).then((lmodel) => {
     model = lmodel;
     console.log('model ready');
     resizeVideo();
-    startVideo();
+    isHandTrackLoaded = true;
+    // startVideo();
 });
-

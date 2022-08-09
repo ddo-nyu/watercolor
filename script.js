@@ -21,10 +21,30 @@ function updateCurrentColor() {
 }
 
 setTimeout(() => {
-    document.querySelector('.init-screen')?.classList.add('hide');
-}, 5000);
+    document.querySelector('.spotlight')?.classList.add('show');
+    setTimeout(() => {
+        document.querySelector('.content-container')?.classList.add('show');
+        setTimeout(() => {
+            document.querySelector('.instruction-container')?.classList.add('show');
+            setTimeout(() => {
+                document.querySelector('.button-container')?.classList.add('show');
+            }, 2000);
+        }, 5000);
+    }, 3000);
+}, 2000);
 
 document.querySelector('#clear-button').onclick = e => {
     location.reload();
 };
 
+document.querySelector('#mute-button').onclick = e => {
+    currentSound.stop();
+    muted = true;
+};
+
+document.querySelector('#continue-button').onclick = e => {
+    if (isHandTrackLoaded) {
+        startVideo();
+        document.querySelector('.init-screen')?.classList.add('hide');
+    }
+};
