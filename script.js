@@ -31,7 +31,7 @@ setTimeout(() => {
             }, 2000);
         }, 5000);
     }, 3000);
-}, 2000);
+}, 1000);
 
 document.querySelector('#clear-button').onclick = e => {
     location.reload();
@@ -40,7 +40,15 @@ document.querySelector('#clear-button').onclick = e => {
 document.querySelector('#mute-button').onclick = e => {
     currentSound.stop();
     muted = true;
+    e.currentTarget.classList.toggle('show');
+    document.querySelector('#unmute-button').classList.toggle('show');
 };
+
+document.querySelector('#unmute-button').onclick = e => {
+    muted = false;
+    e.currentTarget.classList.toggle('show');
+    document.querySelector('#mute-button').classList.toggle('show');
+}
 
 document.querySelector('#continue-button').onclick = e => {
     if (isHandTrackLoaded) {

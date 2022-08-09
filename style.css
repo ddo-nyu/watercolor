@@ -27,6 +27,7 @@ button {
     font-family: 'Space Mono', monospace;
     font-size: 1em;
     color: inherit;
+    cursor: pointer;
 }
 
 main {
@@ -155,8 +156,8 @@ main {
 }
 
 .wobble-hor-bottom {
-    -webkit-animation: wobble-hor-bottom 5s ease-in-out infinite both;
-    animation: wobble-hor-bottom 5s ease-in-out infinite both;
+    -webkit-animation: wobble-hor-bottom 8s ease-in-out infinite both;
+    animation: wobble-hor-bottom 8s ease-in-out infinite both;
 }
 
 @keyframes wobble-hor-bottom {
@@ -216,6 +217,16 @@ main {
 
 .spotlight.show {
     opacity: 0.1;
+}
+
+#mute-button,
+#unmute-button {
+    display: none;
+}
+
+#mute-button.show,
+#unmute-button.show {
+    display: block;
 }
 
 

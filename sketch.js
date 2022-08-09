@@ -8,7 +8,7 @@ let currentSound = null;
 const myWorker = new Worker('worker.js');
 const COLORS = {
     YELLOW: 'rgba(255, 187, 0, 0.05)',
-    PINK: 'rgba(163, 2, 61, 0.01)',
+    PINK: 'rgba(163, 2, 61, 0.05)',
     BLUE: 'rgba(5, 0, 135, 0.05)',
 };
 let currentColor = COLORS.BLUE;
