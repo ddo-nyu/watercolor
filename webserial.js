@@ -17,11 +17,9 @@ function webSerialSetup() {
     serial.on("data", serialEvent);
     // serial.on("close", makePortButton)
 
-    if (navigator) {
-        // add serial connect/disconnect listeners from WebSerial API:
-        navigator.serial.addEventListener("connect", portConnect);
-        navigator.serial.addEventListener("disconnect", portDisconnect);
-    }
+    // add serial connect/disconnect listeners from WebSerial API:
+    navigator?.serial?.addEventListener("connect", portConnect);
+    navigator?.serial?.addEventListener("disconnect", portDisconnect);
 }
 
 function choosePort() {
