@@ -3,7 +3,7 @@ const serial = new p5.WebSerial();
 function webSerialSetup() {
     // check to see if serial is available:
     if (!navigator.serial) {
-        alert("WebSerial is not supported in this browser. Try Chrome or MS Edge.");
+        // alert("WebSerial is not supported in this browser. Try Chrome or MS Edge.");
     }
     // check for any ports that are available:
     serial.getPorts();

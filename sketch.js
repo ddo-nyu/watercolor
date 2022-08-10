@@ -32,7 +32,7 @@ function setup() {
 
 function draw() {
     if (graphics) {
-        image(graphics, width, height);
+        image(graphics, window.innerWidth, window.innerHeight);
     }
 
     if (arrBuffer.length > 0) {
@@ -157,7 +157,7 @@ function polystack(x, y, r, nsides) {
 }
 
 function screenshot() {
-    graphics = createGraphics(width, height);
+    graphics = createGraphics(window.innerWidth, window.innerHeight);
     arrBuffer = [];
 }
 
