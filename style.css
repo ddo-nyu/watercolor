@@ -229,10 +229,46 @@ main {
     display: block;
 }
 
-
-
 @media screen and (orientation: portrait) {
     .landscape-warning {
         display: flex;
     }
+}
+
+#about {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 3em;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+#about.show {
+    display: flex;
+}
+
+#about .content {
+    overflow: scroll;
+    background: white;
+    width: 100%;
+    min-height: 50vh;
+    padding: 2em;
+    box-shadow: 1px -1px 26px 0px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 1px -1px 26px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 1px -1px 26px 0px rgba(0,0,0,0.25);
+    position: relative;
+}
+
+#close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1em;
+    cursor: pointer;
 }

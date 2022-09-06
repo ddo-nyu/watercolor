@@ -56,3 +56,17 @@ document.querySelector('#continue-button').onclick = e => {
         document.querySelector('.init-screen')?.classList.add('hide');
     }
 };
+
+document.querySelector('#pause-button').onclick = e => {
+    if (isHandTrackLoaded) {
+        stopVideo();
+    }
+};
+
+document.querySelector('#about-button').onclick = e => {
+    document.querySelector('#about')?.classList.add('show');
+};
+
+document.querySelector('#close-button').onclick = e => {
+    document.querySelector('#about')?.classList.remove('show');
+};
