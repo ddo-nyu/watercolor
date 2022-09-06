@@ -64,6 +64,7 @@ document.querySelector('#pause-button').onclick = e => {
 };
 
 document.querySelector('#about-button').onclick = e => {
+    e.preventDefault();
     document.querySelector('#about')?.classList.add('show');
 };
 
